@@ -24,6 +24,7 @@ usage() {
     echo "  -h, --help             Display this help message"
     exit 1
 }
+```
 
 ## Display Ports Function
 
@@ -49,6 +50,7 @@ display_ports() {
         ss -tlnp | awk -v port="$1" '$5 ~ ":"port"$" {print}' | column -t -s' ' -o' | '
     fi
 }
+```
 
 ## Display Docker Function
 
@@ -66,6 +68,7 @@ display_docker() {
         docker inspect $1
     fi
 }
+```
 
 ## Display Nginx Function
 
@@ -82,6 +85,7 @@ display_nginx() {
         grep -r -A 10 "server_name $1" /etc/nginx/sites-enabled/
     fi
 }
+```
 
 ## Display Users Function
 
@@ -98,6 +102,7 @@ display_users() {
         last $1 | head -n 1
     fi
 }
+```
 
 ## Display Time Range Function
 
@@ -113,6 +118,7 @@ display_time_range() {
     echo "Activities from $start_time to $end_time:"
     journalctl --since "$start_time" --until "$end_time"
 }
+```
 
 ## Main Script Logic
 
@@ -151,6 +157,7 @@ while true; do
   esac
   sleep 3600  # Wait for an hour before the next iteration
 done
+```
 
 ## Installation Script
 
@@ -232,6 +239,7 @@ main() {
 
 # Run the main function
 main
+```
 
 ### Systemd Service Configuration
 
@@ -251,6 +259,7 @@ StandardError=append:/var/log/devopsfetch.log
 
 [Install]
 WantedBy=multi-user.target
+```
 
 ### Querying Activities Over the Past 30 Days
 
@@ -265,15 +274,18 @@ end_date=$(date +"%Y-%m-%d %H:%M:%S")
 
 # Call the devopsfetch script with the calculated dates
 /usr/local/bin/devopsfetch -t "$start_date" "$end_date"
+```
 
 ## Run the Installation Script:
 
 ```bash
 bash install_devopsfetch.sh
+```
 
 ## sudo ./install_devopsfetch.sh
 ```bash
 sudo systemctl status devopsfetch
+```
 
 ## Usage
 Command-Line Options
@@ -283,31 +295,37 @@ You can use devopsfetch with the following options:
 
 ```bash
 devopsfetch -p
+```
 
 - Display Docker Information:
 
 ```bash
 devopsfetch -d
+```
 
 - Display Nginx Information:
 
 ```bash
 devopsfetch -n
+```
 
 - Display User Information:
 
 ```bash
 devopsfetch -u
+```
 
 - Display Activities Over Time:
 
 ```bash
 devopsfetch -t START END
+```
 
 - Display Help:
 
 ```bash
 devopsfetch -h
+```
 
 ## Log File
 
@@ -315,3 +333,4 @@ devopsfetch -h
 
 ```bash
 /var/log/devopsfetch.log
+```
