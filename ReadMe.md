@@ -122,11 +122,10 @@ display_time_range() {
 
 ## Main Script Logic
 
-The `devopsfetch` script uses a `while true` loop to continuously process user commands. This loop handles various options and runs the relevant functions based on the provided arguments. Below is the code snippet that illustrates the main logic:
+The devopsfetch script processes user commands, executing relevant functions based on the provided arguments. The script supports various options for displaying system information related to ports, Docker, Nginx, users, and activities over a time range. 
 
 ```bash
-while true; do
-  case "$1" in
+case "$1" in
     -p|--port)
         display_ports "$2"
         ;;
@@ -154,9 +153,7 @@ while true; do
         echo "Invalid option: $1"
         usage
         ;;
-  esac
-  sleep 3600  # Wait for an hour before the next iteration
-done
+esac
 ```
 
 ## Installation Script
@@ -282,7 +279,7 @@ end_date=$(date +"%Y-%m-%d %H:%M:%S")
 bash install_devopsfetch.sh
 ```
 
-## sudo ./install_devopsfetch.sh
+## Verify Installation
 ```bash
 sudo systemctl status devopsfetch
 ```

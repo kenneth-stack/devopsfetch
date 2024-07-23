@@ -83,8 +83,7 @@ display_time_range() {
 }
 
 # Main logic
-while true; do
-  case "$1" in
+case "$1" in
     -p|--port)
         display_ports "$2"
         ;;
@@ -112,7 +111,5 @@ while true; do
         echo "Invalid option: $1"
         usage
         ;;
-  esac
-  sleep 3600  # Wait for an hour before the next iteration
-done
+esac
 
